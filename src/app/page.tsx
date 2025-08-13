@@ -1,10 +1,12 @@
-
-
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
-    <div className="my-container main-header">
-      I think I am working
+    <div>
+      <main>
+        <Navbar/>
+        <div className="h-screen bg-red-500"></div>
+      </main>
     </div>
   );
 }
