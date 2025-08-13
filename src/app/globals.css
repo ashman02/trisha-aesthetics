@@ -1,42 +1,51 @@
+@import "tailwindcss";
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F8F9FA;
+  --foreground: #202020;
+  --primary : #DE5D83;
+  --accent : #FFD700;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary : var(--primary);
+  --color-accent: var(--accent);
+  --font-serif: var(--font-playfair-serif);
+  --font-sans: var(--font-lato-sans);
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+@utility my-container {
+  @apply px-2 md:px-4 lg:px-12 font-bold;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@utility cols-view {
+  @apply flex flex-col items-center justify-center;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+@utility rows-view {
+  @apply flex flex-row items-center justify-center;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+@utility main-header {
+  @apply font-serif font-semibold text-[13vw] leading-[85%] tracking-tighter uppercase text-center;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+@utility logo-header {
+  @apply font-serif font-semibold text-base lg:text-2xl leading-[120%] tracking-tight uppercase;  
 }
+
+@utility medium-header {
+  @apply font-serif font-semibold text-2xl md:text-[32px] lg:text-[40px] leading-[120%] tracking-tight;
+}
+
+@utility large-header {
+  @apply font-serif font-semibold text-[20vw] leading-[85%] tracking-tighter uppercase;;
+}
+
+@utility body-text {
+  @apply font-sans text-base lg:text-2xl leading-[120%] tracking-tight;
+}
+
+
