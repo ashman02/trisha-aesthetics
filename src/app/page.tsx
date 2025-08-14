@@ -1,13 +1,16 @@
 "use client"
 import Image from "next/image"
 import heroImg from "@/../public/images/hero-img2.jpg"
-import Button from "@/components/Button"
-import Seprator from "@/components/Seprator"
+import Button from "@/app/components/Button"
+import Seprator from "@/app/components/Seprator"
+import { useState } from "react"
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true)
   const handleOnHeroBtnClick = () => {
     console.log("clicker")
   }
+
   return (
     <main className="flex flex-col gap-2 lg:gap-4">
       <section className="hero my-container pt-[46px] cols-view">
@@ -20,6 +23,7 @@ export default function Home() {
             priority
             className="w-full h-full object-cover object-[33%]"
             placeholder="blur"
+            onLoad={() => setIsLoading(false)}
           />
         </div>
         <div className="call-to-action cols-view md:flex-row md:items-end md:justify-between">
