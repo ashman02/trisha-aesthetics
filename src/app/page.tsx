@@ -5,7 +5,7 @@ export default function Home() {
     <div>
       <main>
         <Navbar/>
-        <div className="h-screen bg-red-500"></div>
+        <div className="h-screen"></div>
       </main>
     </div>
   );

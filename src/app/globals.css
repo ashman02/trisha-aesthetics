@@ -17,7 +17,7 @@
 }
 
 @utility my-container {
-  @apply px-2 md:px-4 lg:px-12 font-bold;
+  @apply px-2 md:px-4 lg:px-12;
 }
 
 @utility cols-view {
