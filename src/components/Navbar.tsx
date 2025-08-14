@@ -23,7 +23,7 @@ const Navbar = () => {
     },
   ]
   return (
-    <header className="fixed w-full z-50">
+    <header className="fixed w-full z-50 backdrop-blur-xs ">
       <div className="my-container py-2 flex justify-between items-center">
         <Link href="/">
           <h1 className="logo-header">TRISHA AESTHETICS</h1>
