@@ -21,7 +21,7 @@
 }
 
 @utility cols-view {
-  @apply flex flex-col items-center justify-center;
+  @apply flex flex-col gap-2;
 }
 
 @utility rows-view {
@@ -29,7 +29,7 @@
 }
 
 @utility main-header {
-  @apply font-serif font-semibold text-[13vw] leading-[85%] tracking-tighter uppercase text-center;
+  @apply font-serif font-semibold text-[13.3vw] leading-[85%] tracking-tighter uppercase whitespace-nowrap;
 }
 
 @utility logo-header {

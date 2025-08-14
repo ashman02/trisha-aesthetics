@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Lato } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 
 const mainFont = Playfair_Display({
   variable: "--font-playfair-serif",
@@ -28,6 +29,7 @@ export default function RootLayout({
       <body
         className={`${mainFont.variable} ${bodyFont.variable} antialiased`}
       >
+        <Navbar/>
         {children}
       </body>
     </html>
