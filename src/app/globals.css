@@ -29,7 +29,7 @@
 }
 
 @utility main-header {
-  @apply font-serif font-semibold text-[13.3vw] md:text-[13.27vw] lg:text-[13.134vw] leading-[85%] tracking-tighter uppercase whitespace-nowrap;
+  @apply font-serif font-semibold text-[13.3vw] md:text-[13.27vw] lg:text-[13.134vw] leading-[86%] tracking-tighter uppercase whitespace-nowrap;
 }
 
 @utility logo-header {

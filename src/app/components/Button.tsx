@@ -49,7 +49,7 @@ const Button = ({ name, onBtnClick }: buttonProps) => {
 
   return (
     <button
-      className="group py-1 md:py-2 px-3 md:px-6 border-foreground border rounded-full relative overflow-hidden "
+      className="group py-1 md:py-2 px-3 md:px-6 border-foreground border rounded-full relative overflow-hidden cursor-pointer"
       onClick={onBtnClick}
       onMouseEnter={handleOnMouseEnter}
       onMouseLeave={handleOnMouseLeave}
