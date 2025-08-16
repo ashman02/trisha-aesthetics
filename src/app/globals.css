@@ -54,5 +54,14 @@ body {
 }
 
 
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox, Chrome */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+
 
 

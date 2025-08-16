@@ -6,6 +6,8 @@ import Seprator from "@/app/components/Seprator"
 import { useRef, useState } from "react"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
+import { beforAndAfterImagesForHome } from "@/data"
+import InfinitCarousel from "./components/InfinitCarousel"
 gsap.registerPlugin(useGSAP)
 
 export default function Home() {
@@ -20,9 +22,13 @@ export default function Home() {
   const { contextSafe } = useGSAP(() => {
     if (!heroTl.current) return
     heroTl.current
-      .to(heroHeading.current, {
-        y: 0,
-      }, "<")
+      .to(
+        heroHeading.current,
+        {
+          y: 0,
+        },
+        "<"
+      )
       .to(
         ".hero-image",
         {
@@ -87,7 +93,18 @@ export default function Home() {
         </div>
       </section>
       <Seprator />
-      <section>Hey I will be here in few minutes</section>
+      <section className="cols-view">
+        <InfinitCarousel images={beforAndAfterImagesForHome} />
+        <div className="my-container call-to-action cols-view md:flex-row md:items-end md:justify-between">
+          <h1 className="medium-header w-full md:w-4/6 lg:w-1/2">
+            We Help Busy Adults Achieve Clear, Confident Skin
+          </h1>
+          <div>
+            <Button name="START NOW" onBtnClick={handleOnHeroBtnClick} />
+          </div>
+        </div>
+      </section>
+      <Seprator />
     </main>
   )
 }
