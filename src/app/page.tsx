@@ -10,6 +10,7 @@ import { useGSAP } from "@gsap/react"
 import { beforAndAfterImagesForHome } from "@/data"
 import InfinitCarousel from "./components/InfinitCarousel"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import FamousServices from "./components/FamousServices"
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export default function Home() {
@@ -148,6 +149,7 @@ export default function Home() {
         </div>
       </section>
       <Seprator />
+      <FamousServices/>
     </main>
   )
 }
