@@ -1,17 +1,38 @@
+"use client"
 import { famousServicesData } from "@/data"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
 import React, { useState } from "react"
+import SectionIntro from "./SectionIntro"
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const FamousServices = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
+
+  useGSAP(() => {
+    gsap.to(".services-section", {
+      backgroundColor : "var(--foreground)",
+      color : "var(--background)",
+      duration : 0.3,
+      ease : "sine.in",
+      scrollTrigger : {
+        trigger : ".services-section",
+        start : "top -5%",
+        end : "bottom bottom",
+        toggleActions : "play reverse play reverse",
+      }
+    })
+  }, [])
+
   return (
-    <section className="services">
-      <div className="py-32">
-        <h1 className="large-header whitespace-nowrap">SIGNATURE SERVICES</h1>
-        <h1 className="large-header whitespace-nowrap -translate-x-[106%]">
-          SIGNATURE SERVICES
-        </h1>
-      </div>
+    <section className="services-section bg-background text-foreground">
+      <SectionIntro
+        heading1="SIGNATURE SERVICES"
+        heading2="SIGNATURE SERVICES"
+      />
       <div className="overflow-x-hidden pl-2 md:my-container w-full h-screen min-h-[600px] flex gap-2">
         <div className="bigger-image hidden md:block md:w-3/5 h-full">
           <Image
