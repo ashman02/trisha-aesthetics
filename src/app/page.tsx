@@ -1,6 +1,7 @@
 "use client"
 import Image from "next/image"
 import heroImg from "@/../public/images/hero-img2.jpg"
+import aboutImg from "@/../public/images/about-img.jpg"
 import Button from "@/app/components/Button"
 import Seprator from "@/app/components/Seprator"
 import { useRef, useState } from "react"
@@ -8,7 +9,8 @@ import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import { beforAndAfterImagesForHome } from "@/data"
 import InfinitCarousel from "./components/InfinitCarousel"
-gsap.registerPlugin(useGSAP)
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export default function Home() {
   const heroTl = useRef<GSAPTimeline>(null)
@@ -36,6 +38,17 @@ export default function Home() {
         },
         "-=.8"
       )
+
+    gsap.to(".about-main-img", {
+      y: 70,
+      ease: "sine.inOut",
+      scrollTrigger: {
+        trigger: ".about-image-container",
+        start: "top 80%",
+        end: "bottom 20%",
+        scrub: true,
+      },
+    })
   }, [isLoading])
 
   const handleImageLoaded = contextSafe(() => {
@@ -56,7 +69,7 @@ export default function Home() {
   })
 
   return (
-    <main className="flex flex-col gap-2 lg:gap-4 overflow-hidden">
+    <main className="cols-view overflow-hidden">
       <div
         ref={loadingRef}
         className="loading-section w-full h-screen flex items-center justify-center bg-foreground text-background absolute z-[999] opacity-100 medium-header"
@@ -101,6 +114,36 @@ export default function Home() {
           </h1>
           <div>
             <Button name="START NOW" onBtnClick={handleOnHeroBtnClick} />
+          </div>
+        </div>
+      </section>
+      <Seprator />
+      <section className="my-container cols-view">
+        <div className="about-image-container overflow-hidden w-full h-screen min-h-[600px]">
+          <Image
+            src={aboutImg}
+            alt="about section image"
+            className="w-full h-full object-cover object-right lg:object-top-right scale-125 about-main-img"
+          />
+        </div>
+        <div className="cols-view md:flex-row justify-between">
+          <h1 className="medium-header w-full md:w-[45%]">About Me</h1>
+          <div className="cols-view w-full">
+            <p className="body-text">
+              With over 5 years of professional experience and 1,000+ satisfied
+              clients, I specialize in personalized skincare and beauty
+              treatments that deliver real, lasting results. Whether you’re
+              struggling with stress breakouts, aging, sensitivity, or just want
+              to glow without makeup.
+            </p>
+            <p className="body-text">
+              I’m dedicated to understanding your unique needs and crafting
+              effective, gentle solutions—no quick fixes. My clients choose me
+              for my warm, trustworthy approach, proven results, and ongoing
+              commitment to the best in esthetics. Experience calming, expert
+              care that helps you look and feel your best—because confidence
+              begins with healthy skin.
+            </p>
           </div>
         </div>
       </section>

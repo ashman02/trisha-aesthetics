@@ -41,7 +41,7 @@ const InfinitCarousel = ({ images }: { images: Array<StaticImageData> }) => {
     const imgArray = container.querySelectorAll(".carousel-img")
     imgArray.forEach((img) => {
       gsap.to(img, {
-        x: -50,
+        x: 50,
         ease: "power3.inOut",
         scrollTrigger: {
           trigger: img,

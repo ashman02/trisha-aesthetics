@@ -21,7 +21,7 @@
 }
 
 @utility cols-view {
-  @apply flex flex-col gap-2;
+  @apply flex flex-col gap-2 md:gap-4;
 }
 
 @utility rows-view {
