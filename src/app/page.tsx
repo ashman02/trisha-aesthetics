@@ -150,6 +150,7 @@ export default function Home() {
       </section>
       <Seprator />
       <FamousServices/>
+      <section className="h-screen bg-black"></section>
     </main>
   )
 }
