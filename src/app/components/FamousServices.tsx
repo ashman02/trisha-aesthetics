@@ -4,7 +4,7 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
-import React, { useEffect, useRef, useState } from "react"
+import React, { useRef, useState } from "react"
 import SectionIntro from "./SectionIntro"
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
@@ -16,20 +16,22 @@ const FamousServices = () => {
   const serviceContainerHeaderRef = useRef<HTMLHeadingElement>(null)
 
   const { contextSafe } = useGSAP(() => {
-    gsap.to(".services-section", {
-      backgroundColor: "var(--foreground)",
-      color: "var(--background)",
-      duration: 0.3,
-      ease: "sine.in",
-      scrollTrigger: {
-        trigger: ".services-section",
-        start: "top -5%",
-        end: "bottom bottom",
-        toggleActions: "play reverse play reverse",
-      },
+    const mm = gsap.matchMedia()
+    mm.add("(max-width: 767px)", () => {
+      gsap.to(".services-section", {
+        backgroundColor: "var(--foreground)",
+        color: "var(--background)",
+        duration: 0.3,
+        ease: "sine.in",
+        scrollTrigger: {
+          trigger: ".services-section",
+          start: "top -5%",
+          end: "bottom bottom",
+          toggleActions: "play reverse play reverse",
+        },
+      })
     })
 
-    const mm = gsap.matchMedia()
     mm.add("(min-width: 768px)", () => {
       const container = servicesContainerRef.current
       if (!container) return
@@ -42,19 +44,43 @@ const FamousServices = () => {
           start: "top top",
           end: `+=${items.length * 100}%`,
           scrub: true,
-          markers: true,
-          onUpdate: (self) => {
-            const segment = 1 / items.length
-            const idx = Math.min(
-              items.length - 1,
-              Math.max(0, Math.floor(self.progress / segment))
-            )
-            if (idx !== activeIndexRef.current) {
-              handleChangeActiveIndex(idx)
+          onUpdate: () => {
+            if (!container) return
+            const viewportCenter = window.innerHeight / 2 // or container height / 2 if pinned
+            let closestIndex = null
+            let closestDistance = Infinity
+            const maxDistance = window.innerHeight / 2 // change as needed
+
+            items.forEach((item, i) => {
+              const rect = item.getBoundingClientRect()
+              const itemCenter = rect.top + rect.height / 2
+              const distance = Math.abs(viewportCenter - itemCenter)
+
+              // Consider only items within maxDistance from viewport center
+              if (distance < closestDistance && distance <= maxDistance) {
+                closestDistance = distance
+                closestIndex = i
+              }
+            })
+
+            if (
+              closestIndex !== null &&
+              closestIndex !== activeIndexRef.current
+            ) {
+              handleChangeActiveIndex(closestIndex)
             }
           },
         },
       })
+
+      //background change here --
+      tl.to(".services-section", {
+        backgroundColor: "var(--foreground)",
+        color: "var(--background)",
+        duration: 0.3,
+        ease: "sine.inOut",
+      })
+
       items.forEach((item, i) => {
         tl.to(
           item,
@@ -68,6 +94,13 @@ const FamousServices = () => {
           i * 0.3
         )
       })
+      //--- there is a slight problem with this one ---
+      //At the end of the timeline, revert colors back to normal
+      // tl.to(".services-section", {
+      //   backgroundColor: "var(--background)", // original background color
+      //   color: "var(--foreground)", // original text color
+      //   ease: "power3.inOut",
+      // })
     })
   }, [])
 
@@ -88,7 +121,7 @@ const FamousServices = () => {
   })
 
   return (
-    <section className="services-section bg-background text-foreground relative min-h-screen">
+    <section className="services-section relative min-h-screen">
       <SectionIntro
         heading1="SIGNATURE SERVICES"
         heading2="SIGNATURE SERVICES"
