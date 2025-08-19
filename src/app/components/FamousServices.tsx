@@ -32,7 +32,7 @@ const FamousServices = () => {
       const container = servicesContainerRef.current
       if (!container) return
       const items = container.querySelectorAll(".famous-service")
-      gsap.set(items, { yPercent: 100, scale: 0.8 })
+      gsap.set(items, { yPercent: 100, scale: 0.7 })
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
@@ -44,10 +44,17 @@ const FamousServices = () => {
         },
       })
       items.forEach((item, i) => {
-        tl.to(item, { yPercent: 32, scale: 1 }, "<").to(item, {
-          yPercent: -100,
-          scale: 0.8,
-        })
+        tl.to(
+          item,
+          {
+            keyframes: [
+              { yPercent: 32, scale: 1 },
+              { yPercent: -50, scale: 0.7 },
+            ],
+            ease: "sine.inOut",
+          },
+          i * 0.3
+        )
       })
     })
   }, [])
@@ -87,7 +94,7 @@ const FamousServices = () => {
               </div>
             </div>
           ))}
-          <h1 className="medium-header text-center hidden md:block absolute z-20 top-1/2  right-1/8 lg:right-1/3">
+          <h1 className="medium-header text-center hidden md:block absolute z-20 top-1/2 w-full">
             {famousServicesData[activeIndex].name}
           </h1>
         </div>
