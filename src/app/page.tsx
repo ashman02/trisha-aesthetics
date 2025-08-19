@@ -11,6 +11,7 @@ import { beforAndAfterImagesForHome } from "@/data"
 import InfinitCarousel from "./components/InfinitCarousel"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import FamousServices from "./components/FamousServices"
+import Testimonials from "./components/Testimonials"
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export default function Home() {
@@ -150,7 +151,7 @@ export default function Home() {
       </section>
       <Seprator />
       <FamousServices/>
-      <section className="h-screen bg-black"></section>
+      <Testimonials/>
     </main>
   )
 }

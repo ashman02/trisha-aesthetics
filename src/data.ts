@@ -37,4 +37,28 @@ const famousServicesData = [
   },
 ]
 
-export { beforAndAfterImagesForHome, famousServicesData }
+const testimonialsData = [
+  {
+    id: 0,
+    name: "Emily Smith",
+    content:
+      "As a full-time working mom, I barely get time to take care of my skin. Trisha recommended a routine that actually fits my schedule, and the Signature Facial made my skin glow for days! Really appreciated the personal attention and product suggestions.",
+    classes : "bg-primary text-foreground"
+  },
+  {
+    id: 1,
+    name: "Ashley Wilson",
+    content:
+      "My sensitive skin always reacted badly to facials until I found Trisha. Her calming session made a huge difference. I adore her gentle approach and detailed aftercare guidance",
+    classes : "bg-foreground text-background"
+  },
+  {
+    id: 2,
+    name: "Megan Anderson",
+    content:
+      "Trisha’s anti-aging treatment is incredible—she combines expertise with warmth and explains every step. I trust her for my long-term skin health, and always leave glowing and relaxed",
+    classes : "bg-background text-foreground"
+  },
+]
+
+export { beforAndAfterImagesForHome, famousServicesData, testimonialsData }
