@@ -5,11 +5,18 @@ import { useGSAP } from "@gsap/react"
 
 interface buttonProps {
   name: string
+  mainColor?: string
+  secondaryColor?: string
   onBtnClick: () => void
 }
 gsap.registerPlugin(useGSAP)
 
-const Button = ({ name, onBtnClick }: buttonProps) => {
+const Button = ({
+  name,
+  onBtnClick,
+  mainColor = "foreground",
+  secondaryColor = "background",
+}: buttonProps) => {
   const { contextSafe } = useGSAP()
   const tl = useRef<GSAPTimeline>(null)
   const firstColorRef = useRef<HTMLDivElement>(null)
@@ -49,21 +56,28 @@ const Button = ({ name, onBtnClick }: buttonProps) => {
 
   return (
     <button
-      className="group py-1 md:py-2 px-3 md:px-6 border-foreground border rounded-full relative overflow-hidden cursor-pointer"
+      className="group py-1 md:py-2 px-3 md:px-6 border rounded-full relative overflow-hidden cursor-pointer"
+      style={{
+        borderColor: `var(--${mainColor})`,
+        backgroundColor: `var(--${secondaryColor})`,
+      }}
       onClick={onBtnClick}
       onMouseEnter={handleOnMouseEnter}
       onMouseLeave={handleOnMouseLeave}
     >
-      <h2 className="font-sans text-xs leading-[120%] tracking-tight font-semibold text-foreground group-hover:text-background transition-colors duration-300 ease-in">
+      <h2
+        className={`font-sans text-xs leading-[120%] tracking-tight font-semibold text-${mainColor}  group-hover:text-${secondaryColor} transition-colors duration-300 ease-in relative z-30`}
+      >
         {name}
       </h2>
       <div
         ref={firstColorRef}
-        className="w-full h-full bg-primary absolute top-0 left-0 -z-20 scale-y-0 origin-bottom rounded-full"
+        className="w-full h-full bg-primary absolute top-0 left-0 z-10 scale-y-0 origin-bottom rounded-full"
       />
       <div
         ref={secondColorRef}
-        className="w-full h-full bg-foreground absolute top-0 left-0 -z-10 scale-y-0 origin-bottom rounded-full"
+        className="w-full h-full absolute top-0 left-0 scale-y-0 z-20 origin-bottom rounded-full"
+        style={{ backgroundColor: `var(--${mainColor})` }}
       />
     </button>
   )

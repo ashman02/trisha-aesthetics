@@ -61,4 +61,19 @@ const testimonialsData = [
   },
 ]
 
-export { beforAndAfterImagesForHome, famousServicesData, testimonialsData }
+const socialsData = [
+  {
+    name : "Instagram",
+    link : "#"
+  },
+  {
+    name : "Facebook",
+    link : "#"
+  },
+  {
+    name : "X",
+    link : "#"
+  }
+]
+
+export { beforAndAfterImagesForHome, famousServicesData, testimonialsData, socialsData }

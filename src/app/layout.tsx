@@ -3,6 +3,7 @@ import { Playfair_Display, Lato } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/app/components/Navbar"
 import LenisProvider from "./components/LenisProvider"
+import Footer from "./components/Footer"
 
 const mainFont = Playfair_Display({
   variable: "--font-playfair-serif",
@@ -31,6 +32,7 @@ export default function RootLayout({
         <LenisProvider />
         <Navbar />
         {children}
+        <Footer/>
       </body>
     </html>
   )
