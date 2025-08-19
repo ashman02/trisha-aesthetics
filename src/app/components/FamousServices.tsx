@@ -4,16 +4,18 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import SectionIntro from "./SectionIntro"
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const FamousServices = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
+  const activeIndexRef = useRef<number>(activeIndex)
   const servicesContainerRef = useRef<HTMLDivElement>(null)
+  const serviceContainerHeaderRef = useRef<HTMLHeadingElement>(null)
 
-  useGSAP(() => {
+  const { contextSafe } = useGSAP(() => {
     gsap.to(".services-section", {
       backgroundColor: "var(--foreground)",
       color: "var(--background)",
@@ -41,6 +43,16 @@ const FamousServices = () => {
           end: `+=${items.length * 100}%`,
           scrub: true,
           markers: true,
+          onUpdate: (self) => {
+            const segment = 1 / items.length
+            const idx = Math.min(
+              items.length - 1,
+              Math.max(0, Math.floor(self.progress / segment))
+            )
+            if (idx !== activeIndexRef.current) {
+              handleChangeActiveIndex(idx)
+            }
+          },
         },
       })
       items.forEach((item, i) => {
@@ -58,6 +70,22 @@ const FamousServices = () => {
       })
     })
   }, [])
+
+  const handleChangeActiveIndex = contextSafe((i: number) => {
+    activeIndexRef.current = i
+    gsap.fromTo(
+      serviceContainerHeaderRef.current,
+      {
+        opacity: 0,
+        scaleY: 0,
+        duration: 0.3,
+        ease: "power3.inOut",
+        onComplete: () => setActiveIndex(i),
+      },
+      { opacity: 1, scaleY: 1, duration: 0.3, ease: "power3.inOut" }
+    )
+    return
+  })
 
   return (
     <section className="services-section bg-background text-foreground relative min-h-screen">
@@ -94,7 +122,10 @@ const FamousServices = () => {
               </div>
             </div>
           ))}
-          <h1 className="medium-header text-center hidden md:block absolute z-20 top-1/2 w-full">
+          <h1
+            ref={serviceContainerHeaderRef}
+            className="medium-header text-center text-accent hidden md:block absolute z-20 top-1/2 w-full origin-bottom"
+          >
             {famousServicesData[activeIndex].name}
           </h1>
         </div>
