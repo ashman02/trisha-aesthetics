@@ -4,36 +4,64 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Image from "next/image"
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import SectionIntro from "./SectionIntro"
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const FamousServices = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0)
+  const servicesContainerRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
     gsap.to(".services-section", {
-      backgroundColor : "var(--foreground)",
-      color : "var(--background)",
-      duration : 0.3,
-      ease : "sine.in",
-      scrollTrigger : {
-        trigger : ".services-section",
-        start : "top -5%",
-        end : "bottom bottom",
-        toggleActions : "play reverse play reverse",
-      }
+      backgroundColor: "var(--foreground)",
+      color: "var(--background)",
+      duration: 0.3,
+      ease: "sine.in",
+      scrollTrigger: {
+        trigger: ".services-section",
+        start: "top -5%",
+        end: "bottom bottom",
+        toggleActions: "play reverse play reverse",
+      },
+    })
+
+    const mm = gsap.matchMedia()
+    mm.add("(min-width: 768px)", () => {
+      const container = servicesContainerRef.current
+      if (!container) return
+      const items = container.querySelectorAll(".famous-service")
+      gsap.set(items, { yPercent: 100, scale: 0.8 })
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          pin: true,
+          start: "top top",
+          end: `+=${items.length * 100}%`,
+          scrub: true,
+          markers: true,
+        },
+      })
+      items.forEach((item, i) => {
+        tl.to(item, { yPercent: 32, scale: 1 }, "<").to(item, {
+          yPercent: -100,
+          scale: 0.8,
+        })
+      })
     })
   }, [])
 
   return (
-    <section className="services-section bg-background text-foreground">
+    <section className="services-section bg-background text-foreground relative min-h-screen">
       <SectionIntro
         heading1="SIGNATURE SERVICES"
         heading2="SIGNATURE SERVICES"
       />
-      <div className="overflow-x-hidden pl-2 md:my-container w-full h-screen min-h-[600px] flex gap-2">
+      <div
+        ref={servicesContainerRef}
+        className="overflow-hidden pl-2 md:my-container w-full h-screen min-h-[600px] flex gap-2 relative"
+      >
         <div className="bigger-image hidden md:block md:w-3/5 h-full">
           <Image
             src={famousServicesData[activeIndex].img}
@@ -47,7 +75,7 @@ const FamousServices = () => {
               key={s.name}
               className={`cols-view items-center shrink-0 w-[95%] md:w-full lg:w-1/2 snap-start md:snap-normal ${
                 i === famousServicesData.length - 1 ? "mr-2 md:mr-0" : ""
-              }`}
+              } famous-service md:absolute md:h-full`}
             >
               <h1 className="medium-header md:hidden">{s.name}</h1>
               <div className="aspect-square w-full">
