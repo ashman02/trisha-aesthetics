@@ -1,8 +1,21 @@
-import r1 from "@/../public/images/r1.jpg"
-import r2 from "@/../public/images/r2.jpg"
-import r3 from "@/../public/images/r3.jpg"
-import r4 from "@/../public/images/r4.jpg"
-import r5 from "@/../public/images/r5.jpg"
+import r1 from "@/../public/images/results/r1.jpg"
+import r2 from "@/../public/images/results/r2.jpg"
+import r3 from "@/../public/images/results/r3.jpg"
+import r4 from "@/../public/images/results/r4.jpg"
+import r5 from "@/../public/images/results/r5.jpg"
+import r6 from "@/../public/images/results/r6.jpg"
+import r7 from "@/../public/images/results/r7.jpg"
+import r8 from "@/../public/images/results/r8.jpg"
+import r9 from "@/../public/images/results/r9.jpg"
+import r10 from "@/../public/images/results/r10.jpg"
+import r11 from "@/../public/images/results/r11.jpg"
+import r12 from "@/../public/images/results/r12.jpg"
+import r13 from "@/../public/images/results/r13.jpg"
+import r14 from "@/../public/images/results/r14.jpg"
+import r15 from "@/../public/images/results/r15.jpeg"
+import r16 from "@/../public/images/results/r16.jpg"
+import r17 from "@/../public/images/results/r17.jpg"
+import r18 from "@/../public/images/results/r18.jpg"
 
 import facial from "@/../public/images/services/facial.jpg"
 import acne from "@/../public/images/services/acne.jpg"
@@ -135,10 +148,32 @@ const servicesData = [
   },
 ]
 
+const galleryImagesData = [
+  r1,
+  r2,
+  r3,
+  r4,
+  r5,
+  r6,
+  r7,
+  r8,
+  r9,
+  r10,
+  r11,
+  r12,
+  r13,
+  r14,
+  r15,
+  r16,
+  r17,
+  r18,
+]
+
 export {
   beforAndAfterImagesForHome,
   famousServicesData,
   testimonialsData,
   socialsData,
   servicesData,
+  galleryImagesData
 }
