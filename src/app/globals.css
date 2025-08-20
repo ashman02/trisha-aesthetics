@@ -48,6 +48,10 @@
   @apply font-sans text-base lg:text-2xl leading-[120%] tracking-tight;
 }
 
+@utility btn-text {
+  @apply font-sans text-xs lg:text-base leading-[120%] tracking-tight;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
