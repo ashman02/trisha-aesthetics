@@ -1,7 +1,11 @@
 "use client"
 import Button from "@/app/components/Button"
 import Input from "@/app/components/Input"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
 import React, { useRef, useState } from "react"
+
+gsap.registerPlugin(useGSAP)
 
 const Contact = () => {
   const emailInputRef = useRef<HTMLInputElement>(null)
@@ -31,10 +35,20 @@ const Contact = () => {
     return
   }
 
+  useGSAP(() => {
+    gsap.to(".contact-address-form-container", {
+      y: 0,
+      duration: 1,
+      opacity: 1,
+      ease: "sine.inOut",
+      stagger: 0.1,
+    })
+  }, [])
+
   return (
     <main className="my-container min-h-screen flex items-center pt-[46px] pb-6">
-      <section className="flex flex-col gap-16 items-center justify-center md:flex-row-reverse md:gap-4 md:items-start w-full">
-        <div className="input-form flex flex-col gap-6 md:gap-12 w-full md:w-3/5">
+      <section className="flex flex-col gap-16 items-center justify-center md:flex-row-reverse md:gap-4 md:items-start w-full overflow-hidden">
+        <div className="contact-address-form-container input-form flex flex-col gap-6 md:gap-12 w-full md:w-3/5 translate-y-[100%] opacity-0">
           <h1 className="medium-header lg:w-[65%]">
             Ready for Calm, Clear, Radiant Skin?
           </h1>
@@ -61,7 +75,7 @@ const Contact = () => {
             <p className="body-text text-primary w-full h-full">{response}</p>
           </div>
         </div>
-        <div className="address flex flex-col gap-6 md:gap-12 w-full md:w-[40%] h-full">
+        <div className="contact-address-form-container flex flex-col gap-6 md:gap-12 w-full md:w-[40%] h-full translate-y-[100%] opacity-0">
           <h4 className="body-text w-3/5">
             Take the First Step to Your Best Skin Yet
           </h4>

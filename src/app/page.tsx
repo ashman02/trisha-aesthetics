@@ -150,8 +150,8 @@ export default function Home() {
         </div>
       </section>
       <Seprator />
-      <FamousServices/>
-      <Testimonials/>
+      <FamousServices />
+      <Testimonials />
     </main>
   )
 }

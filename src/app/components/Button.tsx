@@ -21,6 +21,7 @@ const Button = ({
   const tl = useRef<GSAPTimeline>(null)
   const firstColorRef = useRef<HTMLDivElement>(null)
   const secondColorRef = useRef<HTMLDivElement>(null)
+  const textRef = useRef<HTMLHeadingElement>(null)
 
   const handleOnMouseEnter = contextSafe(() => {
     if (tl.current) tl.current.kill()
@@ -35,6 +36,11 @@ const Button = ({
           scaleY: 1,
         },
         "-=.3"
+      )
+      .to(
+        textRef.current,
+        { color: `var(--${secondaryColor})`, duration: 0.1, ease : "power1.inOut" },
+        "<"
       )
   })
 
@@ -52,11 +58,12 @@ const Button = ({
         },
         "-=.3"
       )
+      .to(textRef.current, { color: `var(--${mainColor})`, duration: 0.1, ease: "power1.inOut" }, "<")
   })
 
   return (
     <button
-      className="group py-1 md:py-2 px-3 md:px-6 border rounded-full relative overflow-hidden cursor-pointer"
+      className="py-1 md:py-2 px-3 md:px-6 border rounded-full relative overflow-hidden cursor-pointer"
       style={{
         borderColor: `var(--${mainColor})`,
         backgroundColor: `var(--${secondaryColor})`,
@@ -66,7 +73,8 @@ const Button = ({
       onMouseLeave={handleOnMouseLeave}
     >
       <h2
-        className={`font-sans text-xs leading-[120%] tracking-tight font-semibold text-${mainColor}  group-hover:text-${secondaryColor} transition-colors duration-300 ease-in relative z-30`}
+        ref={textRef}
+        className={`font-sans text-xs leading-[120%] tracking-tight font-semibold text-${mainColor} transition-colors duration-300 ease-in relative z-30`}
       >
         {name}
       </h2>
