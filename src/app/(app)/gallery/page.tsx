@@ -75,7 +75,6 @@ const Gallery = () => {
             end: `+=300%`, //() => `+=${isDesktop ? desktopColumnHieght : tabletColumnHieght}px`,
             scrub: true,
             invalidateOnRefresh: true,
-            markers: true,
           },
         })
         // apply based on the screen
