@@ -5,11 +5,13 @@ import { usePathname } from "next/navigation"
 import { socialsData } from "@/data"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
+import { useDestinationHook } from "@/contexts/link-provider"
 
 gsap.registerPlugin(useGSAP)
 
 const Navbar = () => {
   const pathname = usePathname()
+  const { handleSetDestination } = useDestinationHook()
   const navbarTimeline = useRef<GSAPTimeline>(null)
   const navbarMenuContainer = useRef<HTMLElement>(null)
   const navbarItems = [
@@ -118,7 +120,13 @@ const Navbar = () => {
           <ul className="flex flex-col items-start gap-4">
             {navbarItems.map((item) => (
               <li key={item.name} className="overflow-hidden">
-                <Link onClick={handleCloseMenu} href={item.link}>
+                <Link
+                  onClick={() => {
+                    handleCloseMenu()
+                    handleSetDestination(item.link)
+                  }}
+                  href={item.link}
+                >
                   <h1
                     className={`navbar-items main-header ${
                       item.isActive ? "text-primary" : "text-background"

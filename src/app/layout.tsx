@@ -5,6 +5,7 @@ import Navbar from "@/app/components/Navbar"
 import LenisProvider from "./components/LenisProvider"
 import Footer from "./components/Footer"
 import DestinationProvider from "@/contexts/link-provider"
+import PageTransition from "./components/PageTransition"
 
 const mainFont = Playfair_Display({
   variable: "--font-playfair-serif",
@@ -32,9 +33,11 @@ export default function RootLayout({
       <body className={`${mainFont.variable} ${bodyFont.variable} antialiased`}>
         <DestinationProvider>
           <LenisProvider />
-          <Navbar />
-          {children}
-          <Footer />
+          <PageTransition>
+            <Navbar />
+            {children}
+            <Footer />
+          </PageTransition>
         </DestinationProvider>
       </body>
     </html>
