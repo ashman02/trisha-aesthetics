@@ -4,6 +4,7 @@ import "./globals.css"
 import Navbar from "@/app/components/Navbar"
 import LenisProvider from "./components/LenisProvider"
 import Footer from "./components/Footer"
+import DestinationProvider from "@/contexts/link-provider"
 
 const mainFont = Playfair_Display({
   variable: "--font-playfair-serif",
@@ -29,10 +30,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${mainFont.variable} ${bodyFont.variable} antialiased`}>
-        <LenisProvider />
-        <Navbar />
-        {children}
-        <Footer/>
+        <DestinationProvider>
+          <LenisProvider />
+          <Navbar />
+          {children}
+          <Footer />
+        </DestinationProvider>
       </body>
     </html>
   )
