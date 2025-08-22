@@ -8,6 +8,7 @@ import React, { useRef, useState } from "react"
 gsap.registerPlugin(useGSAP)
 
 const Contact = () => {
+  const mainContainerRef = useRef<HTMLDivElement>(null)
   const emailInputRef = useRef<HTMLInputElement>(null)
   const challengeInputRef = useRef<HTMLInputElement>(null)
   const goalInputRef = useRef<HTMLInputElement>(null)
@@ -36,19 +37,22 @@ const Contact = () => {
   }
 
   useGSAP(() => {
-    gsap.to(".contact-address-form-container", {
-      y: 0,
-      duration: 1,
+    gsap.to(mainContainerRef.current, {
       opacity: 1,
-      ease: "sine.inOut",
-      stagger: 0.1,
+      y: 0,
+      duration: 0.8,
+      delay : 0.8,
+      ease: "power3.inOut",
     })
   }, [])
 
   return (
-    <main className="my-container min-h-screen flex items-center pt-[46px] pb-6">
-      <section className="flex flex-col gap-16 items-center justify-center md:flex-row-reverse md:gap-4 md:items-start w-full overflow-hidden">
-        <div className="contact-address-form-container input-form flex flex-col gap-6 md:gap-12 w-full md:w-3/5 translate-y-[100%] opacity-0">
+    <main className="my-container min-h-screen flex items-center pt-[46px] pb-6 overflow-hidden">
+      <section
+        ref={mainContainerRef}
+        className="flex flex-col gap-16 items-center justify-center md:flex-row-reverse md:gap-4 md:items-start w-full overflow-hidden opacity-0 translate-y-[100%]"
+      >
+        <div className="contact-address-form-container input-form flex flex-col gap-6 md:gap-12 w-full md:w-3/5">
           <h1 className="medium-header lg:w-[65%]">
             Ready for Calm, Clear, Radiant Skin?
           </h1>
@@ -75,7 +79,7 @@ const Contact = () => {
             <p className="body-text text-primary w-full h-full">{response}</p>
           </div>
         </div>
-        <div className="contact-address-form-container flex flex-col gap-6 md:gap-12 w-full md:w-[40%] h-full translate-y-[100%] opacity-0">
+        <div className="contact-address-form-container flex flex-col gap-6 md:gap-12 w-full md:w-[40%] h-full">
           <h4 className="body-text w-3/5">
             Take the First Step to Your Best Skin Yet
           </h4>

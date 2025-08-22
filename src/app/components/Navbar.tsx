@@ -6,6 +6,7 @@ import { socialsData } from "@/data"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import { useDestinationHook } from "@/contexts/link-provider"
+import { initAnimation } from "@/utils/initialAnimation"
 
 gsap.registerPlugin(useGSAP)
 
@@ -14,6 +15,7 @@ const Navbar = () => {
   const { handleSetDestination } = useDestinationHook()
   const navbarTimeline = useRef<GSAPTimeline>(null)
   const navbarMenuContainer = useRef<HTMLElement>(null)
+  const headerContainerRef = useRef<HTMLDivElement>(null)
   const navbarItems = [
     {
       name: "Services",
@@ -31,7 +33,13 @@ const Navbar = () => {
       isActive: pathname === "/contact",
     },
   ]
-  const { contextSafe } = useGSAP()
+  const { contextSafe } = useGSAP(() => {
+    if (navbarTimeline.current) navbarTimeline.current.kill()
+    navbarTimeline.current = gsap.timeline({
+      defaults: { duration: 0.8, ease: "sine.inOut", delay: 0.8 },
+    })
+    initAnimation(navbarTimeline.current, headerContainerRef)
+  }, [])
 
   const handleOpenMenu = contextSafe(() => {
     if (navbarTimeline.current) navbarTimeline.current.kill()
@@ -58,11 +66,11 @@ const Navbar = () => {
       )
   })
 
-  const handleCloseMenu = contextSafe(() => {
+  const handleCloseMenu = contextSafe((isDestination: boolean = false) => {
     if (navbarTimeline.current) navbarTimeline.current.kill()
     navbarTimeline.current = gsap
       .timeline({
-        defaults: { duration: 0.8, ease: "sine.inOut" },
+        defaults: { duration: isDestination ? 0.4 : 0.8, ease: "sine.inOut" },
       })
       .to(".navbar-items", {
         y: "100%",
@@ -88,12 +96,18 @@ const Navbar = () => {
   })
 
   return (
-    <header className="fixed w-full z-50 backdrop-blur-xs ">
-      <div className="my-container py-2 flex justify-between items-center">
-        <Link href="/">
+    <header className="fixed w-full z-50 backdrop-blur-xs">
+      <div
+        ref={headerContainerRef}
+        className="my-container py-2 flex justify-between items-center opacity-0 translate-y-[-100%]"
+      >
+        <Link href="/" onClick={() => handleSetDestination("/")}>
           <h1 className="logo-header">TRISHA AESTHETICS</h1>
         </Link>
-        <button onClick={handleOpenMenu} className="hamburger cursor-pointer">
+        <button
+          onClick={() => handleOpenMenu()}
+          className="hamburger cursor-pointer"
+        >
           <div className="w-6 md:w-7 lg:w-8 h-full flex items-center justify-center flex-col gap-[2.5px] md:gap-[3px] lg:gap-1">
             <div className="h-[1.5px] w-full bg-foreground" />
             <div className="h-[1.5px] w-full bg-foreground" />
@@ -107,7 +121,7 @@ const Navbar = () => {
       >
         <div className="closeSign text-end w-full py-2">
           <button
-            onClick={handleCloseMenu}
+            onClick={() => handleCloseMenu()}
             className="closeSign opacity-0 cursor-pointer"
           >
             <div className="h-4 md:h-5 lg:h-7 flex w-[11px]">
@@ -122,7 +136,7 @@ const Navbar = () => {
               <li key={item.name} className="overflow-hidden">
                 <Link
                   onClick={() => {
-                    handleCloseMenu()
+                    handleCloseMenu(true)
                     handleSetDestination(item.link)
                   }}
                   href={item.link}

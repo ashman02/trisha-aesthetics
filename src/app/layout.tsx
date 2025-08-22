@@ -9,7 +9,7 @@ import PageTransition from "./components/PageTransition"
 
 const mainFont = Playfair_Display({
   variable: "--font-playfair-serif",
-  subsets: ["latin"],
+  subsets: ["cyrillic"],
 })
 
 const bodyFont = Lato({

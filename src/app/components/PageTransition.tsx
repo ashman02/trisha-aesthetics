@@ -20,14 +20,12 @@ const PageTransition = ({ children }: { children: React.ReactNode }) => {
     if (transitionTl.current) transitionTl.current.kill()
 
     isTransitioning.current = true
+    router.prefetch(destination)
     // Start with simple animation. You overlay comes in from the bottom
-
-    //Set initial position
-    gsap.set(overlayRef.current, { scaleY: 0, transformOrigin: "bottom" })
 
     //create a timeline to animate
     transitionTl.current = gsap.timeline({
-      defaults: { duration: 0.8, ease: "power3.inOut" },
+      defaults: { duration: 0.8, ease: "sine.inOut" },
       onComplete: () => {
         router.push(destination)
         handleRevealPage()
@@ -40,8 +38,9 @@ const PageTransition = ({ children }: { children: React.ReactNode }) => {
 
   //When we are done with our animation we want to remove the overlay
   const handleRevealPage = contextSafe(() => {
-    gsap.set(overlayRef.current, {
+    gsap.to(overlayRef.current, {
       scaleY: 0,
+      duration: 0.1,
       onComplete: () => {
         isTransitioning.current = false
       },
@@ -52,7 +51,7 @@ const PageTransition = ({ children }: { children: React.ReactNode }) => {
     <>
       <div
         ref={overlayRef}
-        className="fixed top-0 left-0 w-full h-svh bg-background pointer-events-none z-[70]"
+        className="fixed top-46 left-0 w-full h-svh bg-background pointer-events-none z-[70] origin-bottom"
       ></div>
       {children}
     </>
