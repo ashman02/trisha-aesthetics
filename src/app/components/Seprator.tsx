@@ -10,14 +10,14 @@ const Seprator = ({ color = "foreground" }: { color?: string }) => {
   const separatorRef = useRef<HTMLDivElement>(null)
   useGSAP(() => {
     gsap.to(separatorRef.current, {
-      scaleX : 1,
-      ease : "power3.inOut",
-      duration : 1,
-      scrollTrigger : {
-        trigger : separatorRef.current,
-        start : "top bottom",
-        end : "+=100%",
-      }
+      scaleX: 1,
+      ease: "power3.inOut",
+      duration: 1,
+      scrollTrigger: {
+        trigger: separatorRef.current,
+        start: "top bottom",
+        end: "+=100%",
+      },
     })
   })
   return (

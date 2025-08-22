@@ -64,6 +64,8 @@ const Gallery = () => {
           gsap.set(columns[0], { y: tabletColumnHieght })
         }
 
+        gsap.set(mainContainerRef.current, { opacity: 1 })
+        gsap.to(mainContainerRef.current, { opacity: 1, duration: 0.5 })
         // Create a timeline with scroll trigger
         if (animationTl.current) animationTl.current.kill()
         animationTl.current = gsap.timeline({

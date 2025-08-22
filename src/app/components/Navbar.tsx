@@ -6,7 +6,6 @@ import { socialsData } from "@/data"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import { useDestinationHook } from "@/contexts/link-provider"
-import { initAnimation } from "@/utils/initialAnimation"
 
 gsap.registerPlugin(useGSAP)
 
@@ -34,11 +33,13 @@ const Navbar = () => {
     },
   ]
   const { contextSafe } = useGSAP(() => {
-    if (navbarTimeline.current) navbarTimeline.current.kill()
-    navbarTimeline.current = gsap.timeline({
-      defaults: { duration: 0.8, ease: "sine.inOut", delay: 0.8 },
+    gsap.to(headerContainerRef.current, {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      ease: "sine.inOut",
+      delay: 0.8,
     })
-    initAnimation(navbarTimeline.current, headerContainerRef)
   }, [])
 
   const handleOpenMenu = contextSafe(() => {
@@ -99,7 +100,7 @@ const Navbar = () => {
     <header className="fixed w-full z-50 backdrop-blur-xs">
       <div
         ref={headerContainerRef}
-        className="my-container py-2 flex justify-between items-center opacity-0 translate-y-[-100%]"
+        className="my-container py-2 flex justify-between items-center opacity-0 translate-y-[-100%] "
       >
         <Link href="/" onClick={() => handleSetDestination("/")}>
           <h1 className="logo-header">TRISHA AESTHETICS</h1>

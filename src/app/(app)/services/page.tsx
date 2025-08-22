@@ -9,15 +9,19 @@ import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import { ScrollSmoother } from "gsap/ScrollSmoother"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useDestinationHook } from "@/contexts/link-provider"
 
 gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother)
 
 const Services = () => {
   const [activeIndex, setactiveIndex] = useState(0)
   const router = useRouter()
+  const { handleSetDestination } = useDestinationHook()
   const cardsContainerRef = useRef<HTMLDivElement>(null)
   const scrollSmoothRef = useRef<ScrollSmoother>(null)
+  const servicesMainContainerRef = useRef<HTMLDivElement>(null)
   const handleCardClick = () => {
+    handleSetDestination("/contact")
     router.push("/contact")
   }
   useGSAP(() => {
@@ -26,17 +30,21 @@ const Services = () => {
       scrollSmoothRef.current = ScrollSmoother.create({
         smooth: 1,
         effects: true,
-        normalizeScroll : true
+        normalizeScroll: true,
       })
-      //cleanup smooth scroller 
+      //cleanup smooth scroller
       return () => {
         scrollSmoothRef.current?.kill()
       }
     })
   }, [])
   return (
-    <main className="my-container pt-[46px] pb-[16px]">
-      <section id="smooth-wrapper" className="lg:cols-view lg:flex-row">
+    <main className="my-container pt-[46px] pb-[16px] overflow-hidden">
+      <section
+        ref={servicesMainContainerRef}
+        id="smooth-wrapper"
+        className="lg:cols-view lg:flex-row"
+      >
         <div className="hidden w-1/2 h-screen min-h-[600px] lg:cols-view">
           <div className="large-image-container w-full h-full">
             <Image

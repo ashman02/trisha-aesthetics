@@ -12,15 +12,17 @@ import InfinitCarousel from "./components/InfinitCarousel"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import FamousServices from "./components/FamousServices"
 import Testimonials from "./components/Testimonials"
+import { useDestinationHook } from "@/contexts/link-provider"
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 export default function Home() {
+  const { handleSetDestination } = useDestinationHook()
   const heroTl = useRef<GSAPTimeline>(null)
   const heroHeading = useRef<HTMLHeadingElement>(null)
   const heroMainContainer = useRef<HTMLDivElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
   const handleOnHeroBtnClick = () => {
-    console.log("clicker")
+    handleSetDestination("/contact")
   }
 
   useGSAP(() => {

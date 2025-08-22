@@ -4,10 +4,12 @@ import Button from "./Button"
 import Seprator from "./Seprator"
 import { socialsData } from "@/data"
 import Link from "next/link"
+import { useDestinationHook } from "@/contexts/link-provider"
 
 const Footer = () => {
+  const { handleSetDestination } = useDestinationHook()
   const handleOnBtnClick = () => {
-    console.log("hello")
+    handleSetDestination("/contact")
   }
   return (
     <footer className="cols-view py-16 md:py-32 bg-foreground text-background">
@@ -45,8 +47,12 @@ const Footer = () => {
         </div>
       </div>
       <div className="my-container cols-view mt-8 md:flex-row md:justify-between md:items-center">
-        <p className="font-sans text-xs leading-[120%]">&copy; 2023 TRISHA AESTHETICS</p>
-        <p className="font-sans text-xs leading-[120%]">DESIGN BY ASHMAN SIHDU</p>
+        <p className="font-sans text-xs leading-[120%]">
+          &copy; 2023 TRISHA AESTHETICS
+        </p>
+        <p className="font-sans text-xs leading-[120%]">
+          DESIGN BY ASHMAN SIHDU
+        </p>
       </div>
     </footer>
   )
