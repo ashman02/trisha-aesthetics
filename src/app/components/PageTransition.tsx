@@ -38,9 +38,8 @@ const PageTransition = ({ children }: { children: React.ReactNode }) => {
 
   //When we are done with our animation we want to remove the overlay
   const handleRevealPage = contextSafe(() => {
-    gsap.to(overlayRef.current, {
+    gsap.set(overlayRef.current, {
       scaleY: 0,
-      duration: 0.1,
       onComplete: () => {
         isTransitioning.current = false
       },
