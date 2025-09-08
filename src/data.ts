@@ -17,13 +17,13 @@ import r16 from "@/../public/images/results/r16.jpg"
 import r17 from "@/../public/images/results/r17.jpg"
 import r18 from "@/../public/images/results/r18.jpg"
 
-import facial from "@/../public/images/services/facial.jpg"
-import acne from "@/../public/images/services/acne.jpg"
-import antiAging from "@/../public/images/services/anti-aging.jpg"
-import peel from "@/../public/images/services/peel-mask.jpg"
-import skinCalm from "@/../public/images/services/skin-calm.jpg"
-import browShaping from "@/../public/images/services/brow-shaping.jpg"
-import teenMessage from "@/../public/images/services/teen message.jpg"
+import facial from "@/../public/images/services/facial.jpeg"
+import acne from "@/../public/images/services/acne.jpeg"
+import antiAging from "@/../public/images/services/anti-aging.jpeg"
+import peel from "@/../public/images/services/peel-mask.jpeg"
+import skinCalm from "@/../public/images/services/skin-calm.jpeg"
+import browShaping from "@/../public/images/services/brow-shaping.jpeg"
+import teenMessage from "@/../public/images/services/teen message.jpeg"
 
 const beforAndAfterImagesForHome = [r1, r2, r3, r4, r5]
 
