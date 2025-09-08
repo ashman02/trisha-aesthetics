@@ -4,12 +4,10 @@ import "./globals.css"
 import Navbar from "@/app/components/Navbar"
 import LenisProvider from "./components/LenisProvider"
 import Footer from "./components/Footer"
-import DestinationProvider from "@/contexts/link-provider"
-import PageTransition from "./components/PageTransition"
 
 const mainFont = Playfair_Display({
   variable: "--font-playfair-serif",
-  subsets: ["cyrillic"],
+  subsets: ["latin"],
 })
 
 const bodyFont = Lato({
@@ -31,14 +29,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${mainFont.variable} ${bodyFont.variable} antialiased`}>
-        <DestinationProvider>
-          <LenisProvider />
-          <PageTransition>
-            <Navbar />
-            {children}
-            <Footer />
-          </PageTransition>
-        </DestinationProvider>
+        <LenisProvider />
+        <Navbar />
+        {children}
+        <Footer/>
       </body>
     </html>
   )

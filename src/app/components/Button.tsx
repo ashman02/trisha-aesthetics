@@ -39,11 +39,7 @@ const Button = ({
       )
       .to(
         textRef.current,
-        {
-          color: `var(--${secondaryColor})`,
-          duration: 0.1,
-          ease: "power1.inOut",
-        },
+        { color: `var(--${secondaryColor})`, duration: 0.1, ease : "power1.inOut" },
         "<"
       )
   })
@@ -62,11 +58,7 @@ const Button = ({
         },
         "-=.3"
       )
-      .to(
-        textRef.current,
-        { color: `var(--${mainColor})`, duration: 0.1, ease: "power1.inOut" },
-        "<"
-      )
+      .to(textRef.current, { color: `var(--${mainColor})`, duration: 0.1, ease: "power1.inOut" }, "<")
   })
 
   return (
